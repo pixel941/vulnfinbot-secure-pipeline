@@ -62,3 +62,11 @@ def test_chat_invalid_content_type(client):
         content_type="text/plain"
     )
     assert response.status_code == 415
+
+def test_chat_invalid_json(client):
+    response = client.post(
+        "/api/chat",
+        data="{invalid json",
+        content_type="application/json"
+    )
+    assert response.status_code == 400
