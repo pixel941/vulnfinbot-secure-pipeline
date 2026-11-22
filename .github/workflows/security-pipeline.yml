@@ -54,7 +54,7 @@ jobs:
         run: docker build -t vulnfinbot:latest .
 
       - name: Trivy image scan
-        uses: aquasecurity/trivy-action@0.33.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: vulnfinbot:latest
           format: table
