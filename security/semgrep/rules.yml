@@ -1,0 +1,26 @@
+rules:
+  - id: flask-debug-enabled
+    patterns:
+      - pattern: app.run(..., debug=True, ...)
+    message: "Flask debug mode must not be enabled in production."
+    languages:
+      - python
+    severity: ERROR
+
+  - id: hardcoded-secret
+    patterns:
+      - pattern: $VAR = "..."
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: "(?i)(password|secret|api_key|token)"
+    message: "Possible hardcoded secret detected."
+    languages:
+      - python
+    severity: WARNING
+
+  - id: unsafe-eval
+    pattern: eval(...)
+    message: "Avoid using eval() with untrusted input."
+    languages:
+      - python
+    severity: ERROR
